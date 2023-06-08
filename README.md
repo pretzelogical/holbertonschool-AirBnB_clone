@@ -1,2 +1,3 @@
 # holbertonschool-AirBnB_clone
-Wyatt and I attempt the AirBnB Clone project
+Wyatt and Aaron attempt the AirBnB Clone project
+

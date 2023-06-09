@@ -1,20 +1,24 @@
 #!/usr/bin/python3
-"""
-Write a class BaseModel that
-defines all common attributes
-/methods for other classes
-"""
 import uuid
 from datetime import datetime
+"""
+Class BaseModel that defines all common attributes and
+methods for other classes
+"""
 
 
 class BaseModel():
     """Declaration of BaseModel class"""
-
-    def __init__(self):
-        """BaseModel constructor"""
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
+    def __init__(self, *args, **kwargs):
+        """BaseModel constructor
+        Kwargs can be passed a dictionary to use for construction
+        """
+        if kwargs:
+            self.id = kwargs['id']
+            self.created_at = datetime.fromisoformat(kwargs['created_at'])
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
         self.updated_at = datetime.now()
 
     def __str__(self):

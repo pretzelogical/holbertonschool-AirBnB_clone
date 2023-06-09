@@ -4,6 +4,7 @@ from datetime import datetime
 from time import sleep
 from sys import float_info
 import unittest
+"""Tests for BaseModel"""
 
 
 class TestBase(unittest.TestCase):

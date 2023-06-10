@@ -15,8 +15,14 @@ class TestBase(unittest.TestCase):
         self.assertIsInstance(b0, BaseModel)
         self.assertIsInstance(b0.created_at, datetime)
         self.assertIsInstance(b0.updated_at, datetime)
-        try: b0.id
-        except NameError: self.fail('id not set')
+        self.assertIsInstance(b0.id, str)
+        test_time = datetime.fromisoformat('1987-03-03T14:05:01.985')
+        b1 = BaseModel(id='test', created_at=test_time.isoformat())
+        self.assertIsInstance(b1, BaseModel)
+        self.assertIsInstance(b1.created_at, datetime)
+        self.assertIsInstance(b1.updated_at, datetime)
+        self.assertIsInstance(b1.id, str)
+        self.assertEqual(b1.created_at, test_time)
 
     def test_save(self):
         """Test the save method"""
@@ -33,4 +39,15 @@ class TestBase(unittest.TestCase):
         self.assertIsInstance(b0_dict, dict)
         self.assertIsInstance(b0_dict['updated_at'], str)
         self.assertIsInstance(b0_dict['created_at'], str)
+        self.assertEqual(b0.id, b0_dict['id'])
+        self.assertEqual(b0.__class__.__name__, b0_dict['class'])
+        self.assertEqual(b0.updated_at.isoformat(), b0_dict['updated_at'])
+        self.assertEqual(b0.created_at.isoformat(), b0_dict['id'])
 
+    def test_recreate_instance(self):
+        """Test if an instance can be recreated using to_dict()"""
+        b0 = BaseModel()
+        b3 = BaseModel(**b0.to_dict())
+        self.assertEqual(b0.created_at, b3.created_at)
+        self.assertEqual(b0.updated_at, b3.updated_at)
+        self.assertEqual(b0.id, b3.id)

@@ -56,3 +56,9 @@ class TestBase(unittest.TestCase):
         b3 = BaseModel(**b0.to_dict())
         self.assertEqual(b0.created_at, b3.created_at)
         self.assertEqual(b0.id, b3.id)
+
+    def test__str__(self):
+        """test to the __str__ method"""
+        b0 = BaseModel()
+        self.assertEqual(b0.__str__(), "[" + b0.__class__.__name__ + "]"
+                         " (" + b0.id + ") " + str(b0.__dict__))

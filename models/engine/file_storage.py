@@ -9,7 +9,7 @@ JSON file to instances
 """
 
 
-class FileStorage:
+class FileStorage():
     """Serializes and deserializes instances"""
     __file_path = "saved.json"
     __objects = {}

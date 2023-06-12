@@ -1,16 +1,19 @@
 #!/usr/bin/python3
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
+from models import storage
 from datetime import datetime
 from time import sleep
 from sys import float_info
 import json
 import unittest
+import os
 """Tests for BaseModel"""
 
 
 class TestBase(unittest.TestCase):
     """Test the base class"""
+
     def test_instance_creation(self):
         b0 = BaseModel()
         """Test the creation of an instance"""
@@ -27,17 +30,20 @@ class TestBase(unittest.TestCase):
         self.assertEqual(b1.created_at, test_time)
 
     def test_save(self):
-        """Test the save method"""
+        """Test the save method and also loading from that saved file"""
         b0 = BaseModel()
         prev_time = b0.updated_at
         sleep(float_info.min)
+        if os.path.exists('saved.json'):
+            os.remove('saved.json')
         b0.save()
         self.assertIsNot(prev_time, b0.updated_at)
-        # test_dict = {}
-        # for key, value in FileStorage._FileStorage__objects.items():
-        #     test_dict[key] = value
-        # with open('saved.json', 'r') as f:
-        #     self.assertEqual(test_dict, json.load(f))
+        storage.reload()
+        b0_dict = storage._FileStorage__objects[f"BaseModel.{b0.id}"]
+        b0_copy = BaseModel(**b0_dict)
+        self.assertIsInstance(b0_copy, BaseModel)
+        self.assertEqual(b0.id, b0_copy.id)
+        self.assertEqual(b0.created_at, b0_copy.created_at)
 
     def test_to_dict(self):
         """Test the to_dict method"""
@@ -56,3 +62,9 @@ class TestBase(unittest.TestCase):
         b3 = BaseModel(**b0.to_dict())
         self.assertEqual(b0.created_at, b3.created_at)
         self.assertEqual(b0.id, b3.id)
+
+    def test__str__(self):
+        """test to the __str__ method"""
+        b0 = BaseModel()
+        self.assertEqual(b0.__str__(), "[" + b0.__class__.__name__ + "]"
+                         " (" + b0.id + ") " + str(b0.__dict__))

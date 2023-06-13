@@ -31,15 +31,17 @@ class TestBase(unittest.TestCase):
 
     def test_save(self):
         """Test the save method and also loading from that saved file"""
+        if os.path.exists('saved.json'):
+            os.remove('saved.json')
+        FileStorage._FileStorage__objects.clear()
         b0 = BaseModel()
         prev_time = b0.updated_at
         sleep(float_info.min)
-        if os.path.exists('saved.json'):
-            os.remove('saved.json')
         b0.save()
         self.assertIsNot(prev_time, b0.updated_at)
         storage.reload()
-        b0_dict = storage._FileStorage__objects[f"BaseModel.{b0.id}"]
+        b0_dict = storage._FileStorage__objects[f"BaseModel.{b0.id}"].to_dict()
+        print(b0_dict)
         b0_copy = BaseModel(**b0_dict)
         self.assertIsInstance(b0_copy, BaseModel)
         self.assertEqual(b0.id, b0_copy.id)

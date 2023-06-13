@@ -1,10 +1,22 @@
 #!/usr/bin/python3
 from models.base_model import BaseModel
+from models.amenity import Amenity
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
 from models import storage
 import cmd
 """Command line interface for AirBnB clone"""
 
-class_list = {'BaseModel': BaseModel}
+class_list = {'BaseModel': BaseModel,
+              'Amenity': Amenity,
+              'City': City,
+              'Place': Place,
+              'Review': Review,
+              'State': State,
+              'User': User}
 error_messages = {'classMiss': '** class name missing **',
                   'classNotExist': "** class doesn't exist **",
                   'idMiss': "** instance id missing **",
@@ -114,6 +126,7 @@ class HBNBCommand(cmd.Cmd):
         except IndexError: print(error_messages['attrValMiss']); return
 
         update.__setattr__(attr_name, self.parse_attr_val(attr_val, arg))
+        storage.save()
 
     def do_quit(self, arg):
         """Quit hbnb shell"""

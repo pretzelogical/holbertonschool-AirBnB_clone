@@ -26,7 +26,7 @@ class TestState(unittest.TestCase):
         self.assertTrue(type(test2_place.number_rooms) == int)
         self.assertTrue(type(test2_place.number_bathrooms) == int)
         self.assertTrue(type(test2_place.max_guests) == int)
-        self.assertTrue(type(test2_place.prince_by_night) == int)
+        self.assertTrue(type(test2_place.price_by_night) == int)
         self.assertTrue(type(Place.latitude) == float)
         self.assertTrue(type(Place.longitude) == float)
         self.assertTrue(type(Place.amenity_ids) == list)

@@ -12,8 +12,8 @@ class TestFileStorage(unittest.TestCase):
     """tests file storage"""
     def setUp(self):
         """testing file path"""
-        with open("file.json", 'w'):
-            FileStorage._FileStorage__file_path = "file.json"
+        with open("saved.json", 'w'):
+            FileStorage._FileStorage__file_path = "saved.json"
             FileStorage._FileStorage__objects = {}
 
     def test_instance(self):

@@ -25,7 +25,7 @@ class TestUser(unittest.TestCase):
         this_user.email = "test@gmail.com"
         this_user.password = "1234567"
         this_user.first_name = "Derek"
-        this_user.last_name - "Webb"
+        this_user.last_name = "Webb"
         self.assertTrue(type(this_user.email) == str)
         self.assertTrue(type(this_user.password) == str)
         self.assertTrue(type(this_user.first_name) == str)

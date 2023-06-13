@@ -13,8 +13,15 @@ class TestState(unittest.TestCase):
     """tests the state class"""
 
     def test_state_instance(self):
+        """tests if user is an instance of Basemodel"""
         test_state = State()
-        self.assertIsNone(test_state.name)
+        self.assertIsInstance(test_state, BaseModel)
+
+    def test_state_name_type(self):
+        """tests if states name is a string"""
+        test2_state = State()
+        self.assertTrue(type(test2_state.name) == str)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -8,7 +8,7 @@ methods for other classes
 """
 
 
-class BaseModel:
+class BaseModel():
     """Declaration of BaseModel class"""
     def __init__(self, *args, **kwargs):
         """BaseModel constructor

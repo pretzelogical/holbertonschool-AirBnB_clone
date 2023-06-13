@@ -22,7 +22,8 @@ class TestBase(unittest.TestCase):
         self.assertIsInstance(b0.updated_at, datetime)
         self.assertIsInstance(b0.id, str)
         test_time = datetime.fromisoformat('1987-03-03T14:05:01.985')
-        b1 = BaseModel(id='test', created_at=test_time.isoformat())
+        b1 = BaseModel(id='test', created_at=test_time.isoformat(),
+                       updated_at=test_time.isoformat())
         self.assertIsInstance(b1, BaseModel)
         self.assertIsInstance(b1.created_at, datetime)
         self.assertIsInstance(b1.updated_at, datetime)

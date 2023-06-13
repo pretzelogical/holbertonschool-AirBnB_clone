@@ -74,6 +74,7 @@ class HBNBCommand(cmd.Cmd):
 
         try: objects.pop(f'{name}.{id}')
         except: print(error_messages['idNoInstance']); return
+        storage.save()
 
     def do_all(self, arg):
         """Prints all string representation based on class name"""

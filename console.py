@@ -9,15 +9,17 @@ import cmd
 
 class HBNBCommand(cmd.Cmd):
     """declaring hbtn command class"""
-    def quit(self, arg):
+    prompt = '(hbnb)'
+
+    def do_quit(self, arg):
         """method to quit the program"""
         return True
 
-    def EOF(self, arg):
+    def do_EOF(self, arg):
         """method EOF"""
         return True
 
-    def blank_line(self, arg):
+    def emptyline(self):
         """method for a blank line"""
         pass
 

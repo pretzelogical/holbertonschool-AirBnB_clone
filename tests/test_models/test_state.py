@@ -13,7 +13,7 @@ class TestState(unittest.TestCase):
     """tests the state class"""
 
     def test_state_instance(self):
-        """tests if user is an instance of Basemodel"""
+        """tests if state is an instance of Basemodel"""
         test_state = State()
         self.assertIsInstance(test_state, BaseModel)
 

@@ -11,7 +11,7 @@ JSON file to instances
 
 class FileStorage:
     """Serializes and deserializes instances"""
-    __file_path = "saved.json"
+    __file_path = "file.json"
     __objects = {}
 
     def all(self):

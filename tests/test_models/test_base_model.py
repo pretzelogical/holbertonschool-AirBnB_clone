@@ -32,8 +32,8 @@ class TestBase(unittest.TestCase):
 
     def test_save(self):
         """Test the save method and also loading from that saved file"""
-        if os.path.exists('saved.json'):
-            os.remove('saved.json')
+        if os.path.exists('file.json'):
+            os.remove('file.json')
         FileStorage._FileStorage__objects.clear()
         b0 = BaseModel()
         prev_time = b0.updated_at

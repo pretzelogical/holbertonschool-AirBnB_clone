@@ -50,6 +50,42 @@ class HBNBCommand(cmd.Cmd):
         try: print(objects[f'{name}.{id}'])
         except: print(error_messages['idNoInstance']); return
 
+    def do_destroy(self, arg):
+        """Deletes an instance, and saves the change
+        ex: destroy BaseModel 1234-1234
+        """
+        if not arg:
+            print(error_messages['classMiss'])
+            return
+        args = self.split_arg(arg)
+        name = args[0]
+        objects = storage.all()
+
+        if name not in class_list.keys():
+            print(error_messages['classNotExist'])
+            return
+
+        if len(args) != 2:
+            print(error_messages['idMiss'])
+            return
+        id = args[1]
+
+        try: objects.pop(f'{name}.{id}')
+        except: print(error_messages['idNoInstance']); return
+
+    def do_all(self, arg):
+        """Prints all string representation based on class name"""
+        all = storage.all()
+        if arg:
+            if arg not in class_list.keys():
+                print(error_messages['classMiss'])
+            for key, val in all.items():
+                if isinstance(val, class_list[arg]):
+                    print(val)
+        else:
+            for key, val in all.items():
+                print(val)
+
     def do_quit(self, arg):
         """Quit hbnb shell"""
         return True

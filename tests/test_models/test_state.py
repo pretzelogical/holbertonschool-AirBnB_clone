@@ -14,7 +14,7 @@ class TestState(unittest.TestCase):
 
     def test_state_instance(self):
         test_state = State()
-        self.assertIsNotNone(test_state)
+        self.assertIsNone(test_state.name)
 
 if __name__ == '__main__':
     unittest.main()

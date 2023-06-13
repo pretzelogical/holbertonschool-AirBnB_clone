@@ -1,8 +1,9 @@
 #!/usr/bin/python3
+"""Command line interface for AirBnB clone"""
 from models.base_model import BaseModel
 from models import storage
 import cmd
-"""Command line interface for AirBnB clone"""
+
 
 class_list = {'BaseModel': BaseModel}
 error_messages = {'classMiss': '** class name missing **',

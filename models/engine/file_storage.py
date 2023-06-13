@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import json
 import os
+import User
 """
 FileStorage class
 that serializes instances

@@ -10,6 +10,15 @@ import json
 
 class TestFileStorage(unittest.TestCase):
     """tests file storage"""
-    with open("file.json", 'w'):
-        FileStorage._FileStorage__file_path = "file.json"
-        FileStorage._FileStorage__objects = {}
+    def setUp(self):
+        """testing file path"""
+        with open("file.json", 'w'):
+            FileStorage._FileStorage__file_path = "file.json"
+            FileStorage._FileStorage__objects = {}
+
+    def test_instance(self):
+        """tests the instance"""
+        self.assertIsInstance(storage, FileStorage)
+
+if __name__ == '__main__':
+    unittest.main()

@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""Command line interface for AirBnB clone"""
 from models.base_model import BaseModel
 from models.amenity import Amenity
 from models.city import City
@@ -8,7 +9,7 @@ from models.state import State
 from models.user import User
 from models import storage
 import cmd
-"""Command line interface for AirBnB clone"""
+
 
 class_list = {'BaseModel': BaseModel,
               'Amenity': Amenity,
@@ -138,6 +139,7 @@ class HBNBCommand(cmd.Cmd):
 
     @staticmethod
     def split_arg(arg):
+        """"method that splits args"""
         return arg.split(sep=' ')
 
     @staticmethod

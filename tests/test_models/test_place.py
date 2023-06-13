@@ -23,7 +23,7 @@ class TestState(unittest.TestCase):
         self.assertTrue(type(test2_place.city_id) == str)
         self.assertTrue(type(test2_place.user_id) == str)
         self.assertTrue(type(test2_place.description) == str)
-        self.assertTrue(type(test2_place.number_rooms) == str)
+        self.assertTrue(type(test2_place.number_rooms) == int)
         self.assertTrue(type(test2_place.number_bathrooms) == int)
         self.assertTrue(type(test2_place.max_guest) == int)
         self.assertTrue(type(test2_place.prince_by_night) == int)

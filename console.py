@@ -147,5 +147,9 @@ class HBNBCommand(cmd.Cmd):
         else:
             return(val)
 
+    def emptyline(self):
+        """does nothing"""
+        pass
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

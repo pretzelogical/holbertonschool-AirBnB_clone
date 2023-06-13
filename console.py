@@ -125,6 +125,7 @@ class HBNBCommand(cmd.Cmd):
 
     @staticmethod
     def split_arg(arg):
+        """splits the args"""
         return arg.split(sep=' ')
 
     # NOTE: cannot accurately convert floats or multi-line strings as of now

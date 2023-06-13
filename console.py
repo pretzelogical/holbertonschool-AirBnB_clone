@@ -1,9 +1,8 @@
 #!/usr/bin/python3
-"""Command line interface for AirBnB clone"""
 from models.base_model import BaseModel
 from models import storage
 import cmd
-
+"""Command line interface for AirBnB clone"""
 
 class_list = {'BaseModel': BaseModel}
 error_messages = {'classMiss': '** class name missing **',
@@ -89,7 +88,6 @@ class HBNBCommand(cmd.Cmd):
             for key, val in all.items():
                 print(val)
 
-    # NOTE: cannot accurately convert floats or multi-line strings as of now
     def do_update(self, arg):
         """Updates an instance based on the class name and id by adding or
         updating attribute
@@ -126,10 +124,8 @@ class HBNBCommand(cmd.Cmd):
 
     @staticmethod
     def split_arg(arg):
-        """splits the args"""
         return arg.split(sep=' ')
 
-    # NOTE: cannot accurately convert floats or multi-line strings as of now
     @staticmethod
     def parse_attr_val(val, arg):
         """Converts val to a int/float or if it detects not a number
@@ -137,19 +133,18 @@ class HBNBCommand(cmd.Cmd):
         """
         import re
         if val.startswith('"'):
-            val = re.findall(r'"(.*?)"', arg)
+            start = arg.find('"') + 1
+            end = arg.find('"', start)
+            val = arg[start:end]
         val = str(val)
-        if val.isdigit():
+        if val.isnumeric():
             try: return int(val)
             except ValueError: pass
+        if val.replace('.', '').isnumeric():
             try: return float(val)
             except ValueError: pass
         else:
             return(val)
-
-    def emptyline(self):
-        """does nothing"""
-        pass
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

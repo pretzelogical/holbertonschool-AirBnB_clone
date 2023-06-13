@@ -8,7 +8,9 @@ class_list = {'BaseModel': BaseModel}
 error_messages = {'classMiss': '** class name missing **',
                   'classNotExist': "** class doesn't exist **",
                   'idMiss': "** instance id missing **",
-                  'idNoInstance': "** no instance found **"}
+                  'idNoInstance': "** no instance found **",
+                  'attrNameMiss': '** attribute name missing **',
+                  'attrValMiss': '** value missing **'}
 
 class HBNBCommand(cmd.Cmd):
     """Command line interface for AirBnB clone"""
@@ -86,6 +88,33 @@ class HBNBCommand(cmd.Cmd):
             for key, val in all.items():
                 print(val)
 
+    # NOTE: cannot accurately convert floats or multi-line strings as of now
+    def do_update(self, arg):
+        """Updates an instance based on the class name and id by adding or
+        updating attribute
+        ex: <class name> <id> <attribute name> "<attribute value>"
+        """
+        objects = storage.all()
+        if not arg:
+            print(error_messages['classMiss'])
+            return
+        args = self.split_arg(arg)
+        name = args[0]
+
+        try: id = args[1]
+        except IndexError: print(error_messages['idMiss']); return
+
+        try: update = objects[f'{name}.{id}']
+        except KeyError: print(error_messages['idNoInstance']); return
+
+        try: attr_name = args[2]
+        except IndexError: print(error_messages['attrNameMiss']); return
+
+        try: attr_val = args[3]
+        except IndexError: print(error_messages['attrValMiss']); return
+
+        update.__setattr__(attr_name, self.parse_attr_val(attr_val, arg))
+
     def do_quit(self, arg):
         """Quit hbnb shell"""
         return True
@@ -97,6 +126,24 @@ class HBNBCommand(cmd.Cmd):
     @staticmethod
     def split_arg(arg):
         return arg.split(sep=' ')
+
+    # NOTE: cannot accurately convert floats or multi-line strings as of now
+    @staticmethod
+    def parse_attr_val(val, arg):
+        """Converts val to a int/float or if it detects not a number
+        just return val
+        """
+        import re
+        if val.startswith('"'):
+            val = re.findall(r'"(.*?)"', arg)
+        val = str(val)
+        if val.isdigit():
+            try: return int(val)
+            except ValueError: pass
+            try: return float(val)
+            except ValueError: pass
+        else:
+            return(val)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

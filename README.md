@@ -35,3 +35,5 @@ Testing can be done using the following
 command
 
 ```
+python -m unittest discover -v
+```

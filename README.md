@@ -28,3 +28,6 @@ b17ce628-7d36-4a43-925d-9508ee873284
 (hbnb) destroy BaseModel b17ce628-7d36-4a43-925d-9508ee873284
 (hbnb) all
 ```
+
+## Testing
+

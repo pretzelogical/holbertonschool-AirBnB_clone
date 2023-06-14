@@ -31,4 +31,4 @@ b17ce628-7d36-4a43-925d-9508ee873284
 
 ## Testing
 
-Testing can be done using the followinf comman
+Testing can be done using the followinf command
